@@ -52,7 +52,7 @@ Essa decisão também prepara o sistema para evoluções futuras — por exemplo
 ### Positivas
 
 - **Isolamento de falhas**: falhas de processamento não afetam diretamente a API principal.
-- **Escalabilidade independente**: a nova API poderá escalar horizontalmente conforme a carga de processamento.
+- **Escalabilidade independente**: a nova API poderá escalar conforme a carga de processamento.
 - **Desacoplamento tecnológico**: a dependência do Apache Spark ficam restritas ao microserviço, simplificando a DataFlow. E não haverá mais a necessidade da Python.NET.
 - **Facilidade de desenvolvimento**: permite pipelines de CI/CD e deploy separados.
 - **Melhor controle de carga e retries**: com mensageria, é possível reprocessar mensagens com falha.
@@ -60,5 +60,5 @@ Essa decisão também prepara o sistema para evoluções futuras — por exemplo
 ### Negativas
 
 - **Aumento da complexidade arquitetural**: requer infraestrutura de mensageria, nesse caso, a infraestrutura do RabbitMQ.
-- **Monitoramento mais complexo**: será necessário rastrear o fluxo de mensagens e estado entre serviços.
+- **Monitoramento mais complexo**: necessário rastrear o fluxo de mensagens e estado entre serviços.
 - **Mais chamadas ao sistema de armazenamento**: O RabbitMQ encontra dificuldades para enviar arquivos muito grandes, nesse caso, a solução foi enviar o arquivo no DataFlow para o sistema de amazenamento e mandar por mensagem o path do arquivo. O serviço de manipulação de dados recebe o caminho e busca o arquivo no banco para processá-lo.
